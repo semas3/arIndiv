@@ -97,8 +97,13 @@ public class MainActivity extends AppCompatActivity {
             texture.getSurfaceTexture().setOnFrameAvailableListener(null);
         });
         anchorNode.setWorldScale(new Vector3(extentX, 1f, extentZ));
+        anchorNode.setOnTapListener((var1, var2) -> onTap());
         scene.addChild(anchorNode);
         findViewById(R.id.playButton).setEnabled(true);
+    }
+
+    public void onTap() {
+        playVideo();
     }
 
     public void playVideo() {
@@ -115,6 +120,9 @@ public class MainActivity extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(this, Uri.parse(path));
         mediaPlayer.setSurface(texture.getSurface());
         mediaPlayer.setLooping(true);
+
+        mediaPlayer.start();
+        mediaPlayer.pause();
     }
 
     public void chooseVideo() {
